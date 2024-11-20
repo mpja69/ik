@@ -12,19 +12,21 @@ type point struct {
 	x, y float64
 }
 type segment struct {
-	angle  float64
-	length float64
-	start  point
-	color  color.RGBA
-	width  float64
+	angle      float64
+	length     float64
+	start      point
+	color      color.RGBA
+	width      float64
+	adjustment float64
 }
 
-func segmentNew(start point, length, width float64, color color.RGBA) *segment {
+func segmentNew(start point, length, width, adjustment float64, color color.RGBA) *segment {
 	return &segment{
-		length: length,
-		start:  start,
-		width:  width,
-		color:  color,
+		length:     length,
+		start:      start,
+		width:      width,
+		color:      color,
+		adjustment: adjustment,
 	}
 }
 
@@ -39,7 +41,7 @@ func (s *segment) updateAngle(end, target point) {
 	for delta > math.Pi {
 		delta -= 2 * math.Pi
 	}
-	s.angle += delta * 0.5 // Tip: Don't change if "end arm" is close to target
+	s.angle += delta * s.adjustment * 0.1 // Tip: Don't change if "end arm" is close to target
 }
 
 func (s *segment) end() point {

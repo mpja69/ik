@@ -19,7 +19,7 @@ func limbNew(x, y, nbrSegments int) *limb {
 	segments := make([]*segment, nbrSegments)
 	for i := 0; i < nbrSegments; i++ {
 		t := float64(i) / float64(nbrSegments)
-		segments[i] = segmentNew(p, lerp(t, 30, 100), lerp(t, 10, 1), color.RGBA{255, 255, 255, 255})
+		segments[i] = segmentNew(p, lerp(t, 30, 100), lerp(t, 10, 1), lerp(t, 1.0, 0.1), color.RGBA{255, 255, 255, 255})
 	}
 	return &limb{segments: segments}
 }
