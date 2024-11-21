@@ -1,5 +1,11 @@
 package main
 
+// Procedurally animate limbs with Inverse Kinamatics
+// Using:	Cyclic coordinate descent algorithms
+//			One of the simplier and faster approach to Inverse Kinematics
+//			1) Loop backwards, updating the each element in an array
+//			2) AND, run another inner loop forward, updating every follwing element, (of the current element in 1.)
+
 import (
 	"image/color"
 
