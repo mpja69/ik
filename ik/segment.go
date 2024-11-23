@@ -1,4 +1,4 @@
-package main
+package ik
 
 import (
 	"image/color"

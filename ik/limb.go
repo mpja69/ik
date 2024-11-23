@@ -1,4 +1,4 @@
-package main
+package ik
 
 // Procedurally animate limbs with Inverse Kinamatics
 // Using:	Cyclic coordinate descent algorithms

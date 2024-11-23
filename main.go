@@ -1,6 +1,7 @@
 package main
 
 import (
+	"ik"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
