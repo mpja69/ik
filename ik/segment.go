@@ -8,20 +8,20 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
-type point struct {
-	x, y float64
+type Point struct {
+	X, Y float64
 }
-type segment struct {
+type Segment struct {
 	angle      float64
 	length     float64
-	start      point
+	start      Point
 	color      color.RGBA
 	width      float64
 	adjustment float64
 }
 
-func segmentNew(start point, length, width, adjustment float64, color color.RGBA) *segment {
-	return &segment{
+func segmentNew(start Point, length, width, adjustment float64, color color.RGBA) *Segment {
+	return &Segment{
 		length:     length,
 		start:      start,
 		width:      width,
@@ -31,9 +31,9 @@ func segmentNew(start point, length, width, adjustment float64, color color.RGBA
 }
 
 // Updates the angle of the segment, (to make the endpoint align with the target position)
-func (s *segment) updateAngle(end, target point) {
-	angle := math.Atan2(end.y-s.start.y, end.x-s.start.x)
-	targetAngle := math.Atan2(target.y-s.start.y, target.x-s.start.x)
+func (s *Segment) updateAngle(end, target Point) {
+	angle := math.Atan2(end.Y-s.start.Y, end.X-s.start.X)
+	targetAngle := math.Atan2(target.Y-s.start.Y, target.X-s.start.X)
 	delta := targetAngle - angle
 	for delta < -math.Pi {
 		delta += 2 * math.Pi
@@ -44,17 +44,17 @@ func (s *segment) updateAngle(end, target point) {
 	s.angle += delta * s.adjustment * 0.1 // Tip: Don't change if "end arm" is close to target
 }
 
-func (s *segment) end() point {
-	x1 := s.start.x + math.Cos(s.angle)*s.length
-	y1 := s.start.y + math.Sin(s.angle)*s.length
-	return point{x1, y1}
+func (s *Segment) end() Point {
+	x1 := s.start.X + math.Cos(s.angle)*s.length
+	y1 := s.start.Y + math.Sin(s.angle)*s.length
+	return Point{x1, y1}
 }
 
-func (s *segment) draw(screen *ebiten.Image) {
+func (s *Segment) draw(screen *ebiten.Image) {
 	end := s.end()
 	vector.StrokeLine(screen,
-		float32(s.start.x), float32(s.start.y),
-		float32(end.x), float32(end.y),
+		float32(s.start.X), float32(s.start.Y),
+		float32(end.X), float32(end.Y),
 		float32(s.width), s.color, true,
 	)
 }

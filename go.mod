@@ -1,4 +1,4 @@
-module github.com/mpja69/inverse_kinematics
+module github.com/mpja69/ik
 
 go 1.23.0
 
