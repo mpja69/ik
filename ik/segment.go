@@ -30,7 +30,7 @@ func segmentNew(start Point, length, width, adjustment float64, color color.RGBA
 	}
 }
 
-func (s *Segment) setPoint(p Point) {
+func (s *Segment) setPos(p Point) {
 	s.start = p
 }
 
