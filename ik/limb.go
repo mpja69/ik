@@ -1,7 +1,7 @@
 package ik
 
 // Procedurally animate limbs with Inverse Kinamatics
-// Using:	Cyclic coordinate descent algorithms
+// Using:	Cyclic coordinate descent - CCDIK
 //			One of the simplier and faster approach to Inverse Kinematics
 //			1) Loop backwards, updating the each element in an array
 //			2) AND, run another inner loop forward, updating every follwing element, (of the current element in 1.)
@@ -28,6 +28,10 @@ func LimbNew(x, y, nbrSegments int) *Limb {
 		segments[i] = segmentNew(p, lerp(t, 30, 100), lerp(t, 10, 1), lerp(t, 1.0, 0.1), color.RGBA{255, 255, 255, 255})
 	}
 	return &Limb{segments: segments}
+}
+
+func (l *Limb) SetPos(p Point) {
+	l.segments[0].setPos(p)
 }
 
 // Update all segments of the limb with respect to the target point

@@ -30,6 +30,10 @@ func segmentNew(start Point, length, width, adjustment float64, color color.RGBA
 	}
 }
 
+func (s *Segment) setPoint(p Point) {
+	s.start = p
+}
+
 // Updates the angle of the segment, (to make the endpoint align with the target position)
 func (s *Segment) updateAngle(end, target Point) {
 	angle := math.Atan2(end.Y-s.start.Y, end.X-s.start.X)
