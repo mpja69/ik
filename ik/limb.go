@@ -25,13 +25,19 @@ func LimbNew(x, y, nbrSegments int) *Limb {
 	segments := make([]*Segment, nbrSegments)
 	for i := 0; i < nbrSegments; i++ {
 		t := float64(i) / float64(nbrSegments)
-		segments[i] = segmentNew(p, lerp(t, 30, 100), lerp(t, 10, 1), lerp(t, 1.0, 0.1), color.RGBA{255, 255, 255, 255})
+		segments[i] = segmentNew(
+			p,                              // Pos
+			lerp(t, 30, 100),               // Distance
+			lerp(t, 10, 1),                 // Width
+			1,                              // lerp(t, 1.0, 0.1), // Adjustment
+			color.RGBA{255, 255, 255, 255}, // Color
+		)
 	}
 	return &Limb{segments: segments}
 }
 
-func (l *Limb) SetPos(p Point) {
-	l.segments[0].setPos(p)
+func (l *Limb) SetAnchorPos(p Point) {
+	l.segments[0].start = p
 }
 
 // Update all segments of the limb with respect to the target point
